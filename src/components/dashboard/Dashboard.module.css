@@ -1,0 +1,98 @@
+.page { display: flex; flex-direction: column; gap: 20px; }
+
+.welcome h1 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+.welcome p  { font-size: 14px; }
+
+/* ─── Banners ─────────────────────────────────────────────────────────────── */
+.emergencyBanner {
+  border-radius: 14px;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+}
+.emergencyTitle { color: #fff; font-weight: 800; font-size: 15px; }
+.emergencyDesc  { color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 2px; }
+.emergencyBtn {
+  background: #fff;
+  color: #E8192C;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.alertBanner {
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.alertLink {
+  background: none;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+
+/* ─── Stat grid ───────────────────────────────────────────────────────────── */
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.statCard  { border-radius: 16px; padding: 20px; }
+.statBody  { display: flex; justify-content: space-between; align-items: flex-start; }
+.statLabel { font-size: 12px; font-weight: 500; margin-bottom: 8px; }
+.statValue { font-size: 36px; font-weight: 800; line-height: 1; }
+.statIconWrap { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+
+/* ─── Lower grid ──────────────────────────────────────────────────────────── */
+.lowerGrid { display: grid; grid-template-columns: 1fr 340px; gap: 20px; }
+
+.card { border-radius: 16px; overflow: hidden; }
+.cardHeader { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+.cardTitle  { font-weight: 700; font-size: 15px; }
+.cardAction { background: none; border: none; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; font-family: inherit; }
+
+/* ─── Stock list ──────────────────────────────────────────────────────────── */
+.stockList { padding: 4px 0; }
+.stockRow  { display: flex; align-items: center; padding: 10px 20px; gap: 12px; }
+.stockBarWrap { flex: 1; }
+.stockBarBg   { height: 6px; border-radius: 999px; overflow: hidden; }
+.stockBarFill { height: 100%; border-radius: 999px; transition: width 0.5s; }
+.stockUnits   { font-weight: 700; font-size: 14px; min-width: 32px; text-align: right; }
+.emptyNote    { padding: 24px 20px; font-size: 13px; text-align: center; }
+
+/* ─── Match list ──────────────────────────────────────────────────────────── */
+.matchList { padding: 4px 0; }
+.matchRow  { display: flex; align-items: center; gap: 12px; padding: 12px 20px; }
+.matchDot  { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.matchInfo { flex: 1; min-width: 0; }
+
+/* ─── Quick actions ───────────────────────────────────────────────────────── */
+.quickActions { padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.qaLabel { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.qaBtn   { border-radius: 10px; padding: 9px 14px; cursor: pointer; font-weight: 600; font-size: 13px; display: flex; align-items: center; justify-content: space-between; font-family: inherit; }
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .statGrid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .lowerGrid { grid-template-columns: 1fr; }
+  .statGrid  { grid-template-columns: 1fr 1fr; }
+  .welcome h1 { font-size: 18px; }
+}
+@media (max-width: 480px) {
+  .statGrid { grid-template-columns: 1fr; }
+}

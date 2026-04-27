@@ -1,0 +1,274 @@
+
+# 📘 **DOCUMENT 1: Advanced Networking & Infrastructure**
+
+## **1. Background**
+
+* **Demand**
+
+  * Surge of demands to **design, evaluate, manage, maintain sophisticated network infrastructures**
+  * **Big data**
+
+    * Processing and analyzing **massive amounts of data**
+    * Requires:
+
+      * **distributed file systems**
+      * **distributed databases**
+      * **cloud computing platforms**
+      * **Internet storage**
+  * **Cloud computing**
+
+    * Move IT operations to **Internet-connected infrastructure**
+    * Causes **drastic shift in networking requirements**
+
+* **Internet of Things (IoT)**
+
+  * Large numbers of objects using **standard communications architectures**
+  * **Billions of devices interconnected**
+  * Provides:
+
+    * **new interactions between physical world and computing**
+  * Applications:
+
+    * **healthcare, home automation, energy, farming, transportation, education**
+
+* **Mobile devices**
+
+  * **Indispensable part of enterprise IT infrastructure**
+  * Includes **BYOD**
+  * Creates **new demands on network planning and management**
+
+* **Capacity**
+
+  * **Gigabit data rate networks**
+
+    * Ethernet up to **100 Gbps**
+    * Wi-Fi ~ **7 Gbps**
+    * **4G and 5G networks**
+  * **High-speed, high-capacity servers**
+
+    * Needed for **multimedia and data processing**
+
+* **Complexity**
+
+  * Requires:
+
+    * **QoS (Quality of Service)**
+    * **QoE (Quality of Experience)**
+    * **flexible, manageable networking hardware**
+
+* **Security**
+
+  * Increasing need for **security services**
+
+---
+
+## **2. Exploring the Network**
+
+* We are at a **critical turning point**
+* **Globalization of the Internet**
+* Changes:
+
+  * **social, commercial, political, personal interactions**
+* Internet used as **starting point for new products and services**
+
+---
+
+## **3. Communicating in a Network-Centric World**
+
+### **Interconnecting our Lives**
+
+#### **Networks in Our Daily Lives**
+
+* Communication is **almost as important as air, water, food**
+* Networks:
+
+  * **connect people**
+  * **promote unregulated communication**
+* **Internet**
+
+  * Largest network
+  * Means **network of networks**
+  * Collection of **interconnected private and public networks**
+
+---
+
+### **Technology Then and Now**
+
+* Before Internet:
+
+  * No **Google, YouTube, Facebook, online gaming**
+* Now:
+
+  * Share **photos, videos**
+  * **e-learning**
+  * **email, instant messaging**
+  * **online banking**
+  * **weather, traffic info**
+
+---
+
+### **The Global Community**
+
+* Networking technologies:
+
+  * Reduce **geographic distances**
+* Creates:
+
+  * **global communities**
+  * **human network (Cisco)**
+
+---
+
+### **Networks Support the Way We Learn**
+
+* Enable:
+
+  * **virtual classrooms**
+  * **on-demand video**
+  * **collaborative learning**
+  * **mobile learning**
+* Benefits:
+
+  * Removes **geographic barriers**
+  * Supports:
+
+    * **e-learning**
+    * **discussion groups**
+    * **course management**
+
+---
+
+### **Networks Support the Way We Communicate**
+
+* Forms:
+
+  * **Instant Messaging (IM)**
+  * **Social Media**
+  * **Collaboration Tools**
+  * **Weblogs (blogs)**
+  * **Wikis**
+  * **Podcasting**
+  * **Peer-to-Peer (P2P) File Sharing**
+
+---
+
+### **Networks Support the Way We Work**
+
+* Initially:
+
+  * Manage **financial info, customer info, payroll**
+* Now:
+
+  * Support:
+
+    * **email**
+    * **video**
+    * **messaging**
+    * **telephony**
+* Enable:
+
+  * **employee training**
+  * Reduce **cost and travel**
+
+---
+
+## **4. Supporting Communication**
+
+### **Protocols (Rules of Communication)**
+
+* **Identified sender and receiver**
+* **Method of communicating**
+* **Common language and grammar**
+* **Speed and timing**
+* **Acknowledgement requirements**
+
+---
+
+## **5. Quality of Communication**
+
+* Successful when:
+
+  * **message understood = intended meaning**
+* Issues caused by:
+
+  * **network factors**
+
+### **External QoS Factors**
+
+* **Quality of pathway**
+* **Number of transformations**
+* **Redirection/readdressing**
+* **Network traffic**
+* **Time allotted**
+
+### **Internal QoS Factors**
+
+* **Size of message**
+* **Complexity of message**
+* **Importance of message**
+
+---
+
+## **6. The Networking Ecosystem**
+
+* Exists to provide **services to end users**
+* User platforms:
+
+  * **fixed (PC)**
+  * **portable (laptop)**
+  * **mobile (smartphone)**
+
+### **Access Facilities**
+
+* **DSL, cable modems**
+* **Wi-Fi, WiMAX**
+* **cellular networks**
+
+### **Providers**
+
+* **Application providers**
+
+  * Apps run on user device
+* **Application service providers**
+
+  * Software runs on **provider platform**
+  * Examples:
+
+    * **web servers**
+    * **email servers**
+    * **cloud computing provider**
+* **Content providers**
+
+  * Provide **data (email, music, video)**
+
+### **Additional Elements**
+
+* **Data center networking**
+
+  * Large number of interconnected servers
+* **IoT / fog networking**
+
+  * **machine-to-machine communication**
+
+---
+
+# 🧠 **EXAM KEY POINTS (VERY IMPORTANT)**
+
+* **Big data + Cloud computing + IoT + Mobile devices = key drivers**
+* **Internet = network of networks**
+* **QoS vs QoE**
+* **External vs Internal QoS factors**
+* **Protocols = rules of communication**
+* **Forms of communication: IM, Social Media, Wikis, P2P**
+* **Networking ecosystem components:**
+
+  * Users
+  * Access facilities
+  * Application providers
+  * Service providers
+  * Content providers
+* **IoT = billions of interconnected devices**
+* **High-speed networks (Ethernet, Wi-Fi, 5G)**
+* **Data center networking + fog networking**
+
+---

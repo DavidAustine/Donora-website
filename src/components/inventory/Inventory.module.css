@@ -1,0 +1,176 @@
+.page { display: flex; flex-direction: column; gap: 20px; }
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+.pageHeader    { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+.pageTitle     { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+.pageSub       { font-size: 13px; }
+.headerActions { display: flex; align-items: center; gap: 8px; }
+
+.refreshBtn {
+  border-radius: 10px; padding: 8px;
+  cursor: pointer; display: flex; align-items: center; font-family: inherit;
+}
+.addBtn {
+  display: flex; align-items: center; gap: 6px;
+  color: #fff; border: none; border-radius: 10px; padding: 9px 18px;
+  cursor: pointer; font-weight: 700; font-size: 13px; font-family: inherit;
+}
+
+/* ─── Alert ───────────────────────────────────────────────────────────────── */
+.alertBanner {
+  border-radius: 12px; padding: 12px 16px;
+  font-size: 14px; font-weight: 500;
+}
+
+/* ─── Summary ─────────────────────────────────────────────────────────────── */
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.summaryCard {
+  border-radius: 14px; padding: 16px 20px;
+  display: flex; align-items: center; gap: 14px;
+}
+.summaryBar   { width: 10px; height: 44px; border-radius: 999px; flex-shrink: 0; }
+.summaryLabel { color: inherit; font-size: 12px; margin-bottom: 4px; }
+.summaryValue { font-weight: 800; font-size: 28px; line-height: 1; }
+
+/* ─── Filters ─────────────────────────────────────────────────────────────── */
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filterBtn {
+  border-radius: 999px; padding: 6px 14px;
+  cursor: pointer; font-size: 12px; font-weight: 600;
+  transition: all 0.2s; font-family: inherit; text-transform: capitalize;
+}
+
+/* ─── Table ───────────────────────────────────────────────────────────────── */
+.emptyBox { border-radius: 16px; overflow: hidden; }
+.table    { border-radius: 16px; overflow: hidden; }
+.tableHeader {
+  display: grid;
+  grid-template-columns: 100px 1fr 110px 100px 100px;
+  padding: 12px 20px;
+  align-items: center;
+}
+.tableHeading { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+.tableRow {
+  display: grid;
+  grid-template-columns: 100px 1fr 110px 100px 100px;
+  padding: 14px 20px;
+  align-items: center;
+  transition: background 0.15s;
+}
+.tableRow:last-child { border-bottom: none !important; }
+
+.barWrap { display: flex; align-items: center; gap: 8px; padding-right: 16px; }
+.barBg   { flex: 1; height: 8px; border-radius: 999px; overflow: hidden; }
+.barFill { height: 100%; border-radius: 999px; transition: width 0.5s; }
+.barPct  { font-size: 11px; min-width: 32px; text-align: right; }
+
+.unitsCell { font-weight: 700; font-size: 15px; }
+
+.editBtn {
+  display: flex; align-items: center; gap: 4px;
+  border-radius: 8px; padding: 6px 12px;
+  cursor: pointer; font-size: 12px; font-weight: 600;
+  font-family: inherit;
+}
+
+/* ─── Missing types ───────────────────────────────────────────────────────── */
+.missingSection { display: flex; flex-direction: column; gap: 10px; }
+.missingSectionTitle { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.missingTypes { display: flex; gap: 8px; flex-wrap: wrap; }
+.missingBtn {
+  display: flex; align-items: center; gap: 5px;
+  border-radius: 10px; padding: 7px 14px;
+  cursor: pointer; font-size: 13px; font-weight: 600;
+  font-family: inherit; transition: all 0.2s;
+}
+.missingBtn:hover { opacity: 0.8; }
+
+/* ─── Modal ───────────────────────────────────────────────────────────────── */
+.modalOverlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; padding: 16px;
+  backdrop-filter: blur(4px);
+}
+.modal {
+  border-radius: 20px;
+  width: 100%;
+  max-width: 460px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+  animation: modalIn 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.94) translateY(16px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+.modalHeader {
+  padding: 18px 22px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.closeBtn { background: none; border: none; cursor: pointer; display: flex; padding: 2px; }
+.modalBody { padding: 20px 22px; display: flex; flex-direction: column; gap: 18px; }
+
+.field { display: flex; flex-direction: column; gap: 8px; }
+.label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
+
+.lockedType { display: flex; align-items: center; gap: 10px; }
+.bloodTypeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.btBtn {
+  border-radius: 10px; padding: 9px 6px;
+  cursor: pointer; font-size: 13px; font-weight: 700;
+  font-family: inherit; transition: all 0.15s;
+  text-align: center;
+}
+
+.unitsInput {
+  border-radius: 12px; padding: 10px 14px;
+  font-size: 15px; outline: none; font-family: inherit;
+  width: 100%; box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+.unitsInput:focus { border-color: #E8192C !important; }
+
+.statusPreview { font-size: 12px; }
+.formErr { font-size: 13px; color: #DA2525; font-weight: 500; }
+
+.modalActions { display: flex; gap: 10px; padding-top: 4px; }
+.cancelBtn {
+  flex: 1; border-radius: 12px; padding: 11px;
+  cursor: pointer; font-weight: 600; font-size: 14px; font-family: inherit;
+}
+.saveBtn {
+  flex: 2; color: #fff; border: none; border-radius: 12px; padding: 11px;
+  cursor: pointer; font-weight: 700; font-size: 14px; font-family: inherit;
+  transition: opacity 0.2s;
+}
+.saveBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .tableHeader,
+  .tableRow { grid-template-columns: 90px 1fr 90px 90px 90px; }
+}
+@media (max-width: 700px) {
+  .summaryGrid { grid-template-columns: 1fr 1fr; }
+  .tableHeader { display: none; }
+  .tableRow {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 8px;
+    padding: 14px 16px;
+  }
+  .barWrap { grid-column: 1 / -1; }
+}
+@media (max-width: 480px) {
+  .summaryGrid { grid-template-columns: 1fr; }
+}

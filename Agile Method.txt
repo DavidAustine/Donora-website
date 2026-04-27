@@ -1,0 +1,279 @@
+
+# 📘 **DOCUMENT 2: AgileMethod.pdf (AGILE DEVELOPMENT)**
+
+*(Slide-by-slide, short, exam-focused)*
+
+---
+
+## **Slide 1–3: Introduction / Contents**
+
+* **Software Process model – AGILE DEVELOPMENT**
+* Topics:
+
+  * **Agile Manifesto**
+  * **Agile process**
+  * **Agile Principles**
+  * **Human Factors**
+  * **SDLC**
+  * **XP, RAD, SCRUM**
+
+---
+
+## **Slide 4: What is Agile?**
+
+* Based on **empirical approach**
+* Accepts **complexity of the problem**
+* Uses:
+
+  * **frequent inspection**
+  * **constant adaptation**
+
+---
+
+## **Slide 5: Agile software development**
+
+* **Iterative and incremental development**
+* Requirements evolve through:
+
+  * **collaboration**
+  * **self-organizing, cross-functional teams**
+* Promotes:
+
+  * **adaptive planning**
+  * **evolutionary development**
+  * **time-boxed iterative approach**
+  * **rapid and flexible response to change**
+
+---
+
+## **Slide 6: Agile Manifesto (Background)**
+
+* **2001**, 17 developers at **Snowbird, Utah**
+* Created:
+
+  * **Manifesto for Agile Software Development**
+* Formed:
+
+  * **Agile Alliance**
+
+---
+
+## **Slide 7: Agile Manifesto (Core Values)**
+
+* **Individuals and interactions over processes and tools**
+
+* **Working software over comprehensive documentation**
+
+* **Customer collaboration over contract negotiation**
+
+* **Responding to change over following a plan**
+
+* Key idea:
+
+  * Value left **more than right**
+
+---
+
+## **Slide 8: Meaning of Agile Values**
+
+* **Individuals and interactions**
+
+  * **self-organization**, **pair programming**
+* **Working software**
+
+  * More useful than **documents**
+* **Customer collaboration**
+
+  * **continuous involvement**
+* **Responding to change**
+
+  * Focus on **quick responses** and **continuous development**
+
+---
+
+## **Slide 9: Contents**
+
+* Agile process
+* Agile Principles
+* Human Factors
+
+---
+
+## **Slide 10: What is an Agile process?**
+
+* Difficult to predict:
+
+  * **requirements**
+  * **customer priorities**
+* **Design and construction are interleaved**
+* Activities:
+
+  * **analysis, design, construction, testing**
+  * Not predictable
+
+---
+
+## **Slide 11: Agile Principles (1–6)**
+
+1. **Customer satisfaction by rapid delivery**
+2. **Welcome changing requirements**
+3. **Frequent delivery (weeks)**
+4. **Working software = measure of progress**
+5. **Sustainable development**
+6. **Close, daily co-operation**
+
+---
+
+## **Slide 12: Agile Principles (7–12)**
+
+7. **Face-to-face communication**
+8. **Motivated individuals**
+9. **Technical excellence**
+10. **Simplicity**
+11. **Self-organizing teams**
+12. **Regular adaptation**
+
+---
+
+## **Slide 13: Characteristics**
+
+* **Development, teamwork, collaboration**
+* **Process adaptability**
+* Tasks:
+
+  * **small increments**
+  * **minimal planning**
+* Iterations:
+
+  * **1–4 weeks**
+* Each iteration:
+
+  * **planning, design, coding, testing**
+* Output:
+
+  * **working product**
+
+---
+
+## **Slide 14: Characteristics (Team)**
+
+* Teams:
+
+  * **cross-functional**
+  * **self-organizing**
+* Members:
+
+  * Take **responsibility**
+  * Decide **how to meet requirements**
+* Emphasis:
+
+  * **face-to-face communication**
+* Includes:
+
+  * **customer representative**
+
+---
+
+## **Slide 15: Advantages of iterative method**
+
+* **Early release**
+* **Better stakeholders’ feedback**
+* **Change requirements easily**
+* **Reduce uncertainties**
+* **Constant feedback reduces risk**
+
+---
+
+## **Slide 16: Human Factors**
+
+* Focus on **people factors**
+* Process shaped by:
+
+  * **talents and skills**
+* Relies on:
+
+  * **tacit knowledge**
+  * not written plans
+
+---
+
+## **Slide 17: Human Factors (Traits)**
+
+* **Competence**
+* **Common focus**
+* **Collaboration**
+* **Decision-making ability**
+* **Fuzzy problem-solving ability**
+* **Mutual trust and respect**
+* **Self-organization**
+
+---
+
+## **Slide 18: SDLC + Agile Methods**
+
+* Agile methods:
+
+  * **Extreme Programming (XP)**
+  * **Scrum**
+* Assignment:
+
+  * **Crystal Methods**
+  * **DSDM**
+  * **Lean Development**
+  * **FDD**
+
+---
+
+## **Slide 19: Extreme Programming (XP)**
+
+* Improves:
+
+  * **software quality**
+  * **responsiveness to change**
+* Features:
+
+  * **frequent releases**
+  * **short development cycles**
+* Practices:
+
+  * **pair programming**
+  * **unit testing**
+  * **simple design**
+  * **frequent communication**
+
+---
+
+## **Slide 20: XP Process**
+
+* Steps:
+
+  * Write **automated tests**
+  * **Coding (pair programming)**
+  * Tests must **pass**
+* Design:
+
+  * Emerges from **refactoring**
+* Output:
+
+  * **functional system**
+* Cycle repeats
+
+---
+
+# 🧠 **EXAM KEY POINTS (VERY IMPORTANT)**
+
+* **Agile = iterative + incremental**
+* **Empirical approach = inspection + adaptation**
+* **Agile Manifesto (4 values)** ← VERY LIKELY EXAM
+* **12 Agile Principles**
+* **Time-boxed iterations (1–4 weeks)**
+* **Working software = measure of progress**
+* **Cross-functional, self-organizing teams**
+* **Customer collaboration + continuous feedback**
+* **XP practices:**
+
+  * pair programming
+  * unit testing
+  * frequent releases
+* **Human factors = people, not process**
+* **Adaptive vs predictive mindset (important link to next doc)**

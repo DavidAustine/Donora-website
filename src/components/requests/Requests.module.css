@@ -1,0 +1,104 @@
+.page { display: flex; flex-direction: column; gap: 20px; }
+
+.pageHeader    { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+.pageTitle     { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+.pageSub       { font-size: 13px; }
+.headerActions { display: flex; align-items: center; gap: 8px; }
+
+.radiusSelect {
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  outline: none;
+}
+.refreshBtn {
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+}
+
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filterBtn {
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.card {
+  border-radius: 16px;
+  padding: 18px 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-2px); }
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.cardBadges { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.emergencyTag {
+  background: #E8192C;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+.cardMeta {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.patientRow {
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.cardActions { display: flex; gap: 8px; }
+.acceptBtn {
+  flex: 1;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 9px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+.acceptBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.acceptedNote {
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+}
