@@ -138,11 +138,26 @@ export const matchAPI = {
 
 // ─── CHAT ─────────────────────────────────────────────────────────────────────
 export const chatAPI = {
+  // Match-based chat (existing)
   getMessages: (matchId) => apiFetch(`/chat/${matchId}`),
   sendMessage: (matchId, message) =>
     apiFetch("/chat", {
       method: "POST",
       body: JSON.stringify({ matchId, message }),
+    }),
+
+  // Direct threads — used when the mobile app messages the blood bank
+  // without a formal match. The blood bank web dashboard reads these
+  // so that those conversations are visible on both sides.
+  getMyDirectThreads: () => apiFetch("/chat/direct/my-threads"),
+  getDirectThreadMessages: (threadId) =>
+    apiFetch(`/chat/direct/${threadId}/messages`),
+  // Direct thread messages are stored as ChatMessage with match = threadId,
+  // so the same POST /chat endpoint works for sending — matchId = threadId.
+  sendDirectMessage: (threadId, message) =>
+    apiFetch("/chat", {
+      method: "POST",
+      body: JSON.stringify({ matchId: threadId, message }),
     }),
 };
 

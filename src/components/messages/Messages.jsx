@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
-import { useMatches, useChat } from "../../hooks/useApi";
+import { useMatches, useDirectThreads, useChat } from "../../hooks/useApi";
 import { userAPI } from "../../services/api";
 import { Icon, Spinner, EmptyState } from "../common/Common";
 import styles from "./Messages.module.css";
@@ -102,7 +102,7 @@ function LocationBubble({ text, isMine, t }) {
 }
 
 // ─── Chat list sidebar item ───────────────────────────────────────────────────
-function ChatListItem({ match, isActive, currentUserId, t, onClick }) {
+function ChatListItem({ match, isActive, currentUserId, t, onClick, isDirect }) {
   const { name, role } = useOtherUser(match, currentUserId);
   const display    = name || "…";
   const initials   = display !== "…"
@@ -121,11 +121,22 @@ function ChatListItem({ match, isActive, currentUserId, t, onClick }) {
       }}
       onClick={onClick}
     >
-      <div className={styles.chatItemAvatar} style={{ background: t.gradientRed }}>
+      <div className={styles.chatItemAvatar} style={{ background: isDirect ? t.blue + "cc" : t.gradientRed }}>
         {initials}
       </div>
       <div className={styles.chatItemInfo}>
-        <div className={styles.chatItemTitle} style={{ color: t.text }}>{display}</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <div className={styles.chatItemTitle} style={{ color: t.text }}>{display}</div>
+          {isDirect && (
+            <span style={{
+              fontSize: 9, fontWeight: 700, padding: "1px 6px", borderRadius: 20,
+              background: t.blue + "22", color: t.blue, border: "1px solid " + t.blue + "44",
+              flexShrink: 0,
+            }}>
+              Direct
+            </span>
+          )}
+        </div>
         <div className={styles.chatItemSub} style={{ color: t.textMuted }}>
           {role !== "—" ? role.charAt(0).toUpperCase() + role.slice(1) + " · " : ""}
           {dateStr}
@@ -145,8 +156,10 @@ function ChatListItem({ match, isActive, currentUserId, t, onClick }) {
 }
 
 // ─── Chat window ──────────────────────────────────────────────────────────────
-function ChatWindow({ match, t, currentUserId }) {
-  const { messages, loading, sendMessage } = useChat(match?._id);
+function ChatWindow({ match, t, currentUserId, isDirect }) {
+  // Pass isDirect so useChat fetches from the correct endpoint and sends
+  // to the correct route — this is what was broken for direct threads.
+  const { messages, loading, sendMessage } = useChat(match?._id, isDirect);
   const { name: otherName, role: otherRole } = useOtherUser(match, currentUserId);
 
   const [input,       setInput]       = useState("");
@@ -243,7 +256,7 @@ function ChatWindow({ match, t, currentUserId }) {
       {/* ── Header ── */}
       <div className={styles.chatHeader}
         style={{ borderBottom: "1px solid " + t.border, background: t.surface }}>
-        <div className={styles.chatAvatar} style={{ background: t.gradientRed }}>
+        <div className={styles.chatAvatar} style={{ background: isDirect ? t.blue + "cc" : t.gradientRed }}>
           {initials}
         </div>
         <div className={styles.chatHeaderInfo}>
@@ -288,11 +301,11 @@ function ChatWindow({ match, t, currentUserId }) {
         </button>
 
         <div className={styles.chatHeaderBadge} style={{
-          background: req.isEmergency ? t.primary + "18" : t.blue + "14",
-          color:  req.isEmergency ? t.primary : t.blue,
-          border: "1px solid " + (req.isEmergency ? t.primary + "30" : t.blue + "30"),
+          background: isDirect ? t.blue + "18" : req.isEmergency ? t.primary + "18" : t.blue + "14",
+          color:  isDirect ? t.blue : req.isEmergency ? t.primary : t.blue,
+          border: "1px solid " + (isDirect ? t.blue + "30" : req.isEmergency ? t.primary + "30" : t.blue + "30"),
         }}>
-          {req.isEmergency ? "⚡ Emergency" : "Standard"}
+          {isDirect ? "💬 Direct" : req.isEmergency ? "⚡ Emergency" : "Standard"}
         </div>
       </div>
 
@@ -395,16 +408,29 @@ export default function Messages() {
   const { t }          = useTheme();
   const { user }       = useAuth();
   const location       = useLocation();
-  const { matches, loading, refetch } = useMatches();
+  const { matches, loading: matchLoading }           = useMatches();
+  const { threads: directThreads, loading: directLoading } = useDirectThreads();
 
   const currentUserId  = user?._id || user?.id || "";
 
-  // Deduplicate by participant pair (client-side second layer of defence)
-  const chatMatches    = deduplicateMatches(matches);
-  const totalUnread    = chatMatches.reduce((s, m) => s + (m.unreadCount || 0), 0);
+  // Show spinner only on the very first load of both lists
+  const loading = matchLoading && directLoading;
+
+  // Deduplicate match-based chats by participant pair (client-side defence)
+  const chatMatches = deduplicateMatches(matches);
+
+  // Merge match-based chats and direct threads into one unified list,
+  // sorted newest-first. Direct threads get _isDirect=true so the sidebar
+  // and ChatWindow know which fetch/send path to use.
+  const allChats = [
+    ...chatMatches.map((m) => ({ ...m, _isDirect: false })),
+    ...directThreads.map((t) => ({ ...t, _isDirect: true })),
+  ].sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt));
+
+  const totalUnread = allChats.reduce((s, m) => s + (m.unreadCount || 0), 0);
 
   // activeId — driven by navigation state (clicking Chat from Matches page)
-  // or defaults to first match.
+  // or defaults to first item.
   const [activeId, setActiveId] = useState(null);
 
   // React to navigation state changes (e.g., clicking "Chat" from Matches page
@@ -415,17 +441,18 @@ export default function Messages() {
     }
   }, [location.state?.matchId, location.key]); // location.key changes on every navigate()
 
-  // Default to first match once data loads (only if nothing was set by nav state)
+  // Default to first chat once data loads (only if nothing set by nav state)
   useEffect(() => {
-    if (!activeId && chatMatches.length > 0) {
-      setActiveId(chatMatches[0]._id);
+    if (!activeId && allChats.length > 0) {
+      setActiveId(allChats[0]._id);
     }
-  }, [chatMatches.length]); // eslint-disable-line
+  }, [allChats.length]); // eslint-disable-line
 
-  const activeMatch = chatMatches.find((m) => m._id === activeId) || null;
+  const activeChat  = allChats.find((m) => m._id === activeId) || null;
+  const activeIsDirect = activeChat?._isDirect ?? false;
 
   if (loading) return <Spinner label="Loading chats…" />;
-  if (chatMatches.length === 0)
+  if (allChats.length === 0)
     return (
       <EmptyState
         icon="messages"
@@ -454,17 +481,18 @@ export default function Messages() {
               )}
               <span className={styles.chatCount}
                 style={{ background: t.primary + "18", color: t.primary }}>
-                {chatMatches.length}
+                {allChats.length}
               </span>
             </div>
           </div>
 
-          {chatMatches.map((m) => (
+          {allChats.map((m) => (
             <ChatListItem
               key={m._id}
               match={m}
               isActive={m._id === activeId}
               currentUserId={currentUserId}
+              isDirect={m._isDirect}
               t={t}
               onClick={() => setActiveId(m._id)}
             />
@@ -472,8 +500,14 @@ export default function Messages() {
         </div>
 
         {/* Chat panel */}
-        {activeMatch ? (
-          <ChatWindow key={activeMatch._id} match={activeMatch} t={t} currentUserId={currentUserId} />
+        {activeChat ? (
+          <ChatWindow
+            key={activeChat._id}
+            match={activeChat}
+            t={t}
+            currentUserId={currentUserId}
+            isDirect={activeIsDirect}
+          />
         ) : (
           <div className={styles.noChat} style={{ background: t.surface, color: t.textMuted }}>
             Select a conversation to open

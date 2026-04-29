@@ -117,12 +117,36 @@ export function useMatches() {
   return { matches: data || [], loading, error, refetch, cancelMatch };
 }
 
+// ─── Direct threads hook ──────────────────────────────────────────────────────
+// Fetches DirectConversation threads — created when the mobile app messages
+// a blood bank without a formal match. The blood bank web dashboard needs
+// this so those conversations are visible on both sides.
+export function useDirectThreads() {
+  const { data, loading, error, refetch } = useFetch(
+    chatAPI.getMyDirectThreads
+  );
+  // Poll at the same rate as useMatches so the sidebar stays in sync
+  useEffect(() => {
+    const iv = setInterval(() => refetch(true), 10000);
+    return () => clearInterval(iv);
+  }, [refetch]);
+
+  return { threads: data || [], loading, error, refetch };
+}
+
 // ─── Chat hook ────────────────────────────────────────────────────────────────
-export function useChat(matchId) {
+// isDirect=true → fetches from /chat/direct/:threadId/messages and sends
+// via chatAPI.sendDirectMessage so the backend auth check (Match vs
+// DirectConversation) works correctly for each thread type.
+export function useChat(matchId, isDirect = false) {
   const { data, loading, error, refetch, setData } = useFetch(
     () =>
-      matchId ? chatAPI.getMessages(matchId) : Promise.resolve([]),
-    [matchId]
+      matchId
+        ? isDirect
+          ? chatAPI.getDirectThreadMessages(matchId)
+          : chatAPI.getMessages(matchId)
+        : Promise.resolve([]),
+    [matchId, isDirect]
   );
 
   // Poll every 4s for near-realtime chat
@@ -134,7 +158,9 @@ export function useChat(matchId) {
 
   const sendMessage = useCallback(
     async (message) => {
-      const newMsg = await chatAPI.sendMessage(matchId, message);
+      const newMsg = isDirect
+        ? await chatAPI.sendDirectMessage(matchId, message)
+        : await chatAPI.sendMessage(matchId, message);
       setData((prev) => {
         const arr = prev || [];
         if (arr.find((m) => m._id === newMsg._id)) return arr;
@@ -142,7 +168,7 @@ export function useChat(matchId) {
       });
       return newMsg;
     },
-    [matchId, setData]
+    [matchId, isDirect, setData]
   );
 
   return { messages: data || [], loading, error, refetch, sendMessage };
