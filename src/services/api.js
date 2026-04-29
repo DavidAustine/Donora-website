@@ -152,12 +152,12 @@ export const chatAPI = {
   getMyDirectThreads: () => apiFetch("/chat/direct/my-threads"),
   getDirectThreadMessages: (threadId) =>
     apiFetch(`/chat/direct/${threadId}/messages`),
-  // Direct thread messages are stored as ChatMessage with match = threadId,
-  // so the same POST /chat endpoint works for sending — matchId = threadId.
+  // Send to the direct-thread route so the backend validates against
+  // DirectConversation, not Match (which caused the "Match not found" error).
   sendDirectMessage: (threadId, message) =>
-    apiFetch("/chat", {
+    apiFetch(`/chat/direct/${threadId}/messages`, {
       method: "POST",
-      body: JSON.stringify({ matchId: threadId, message }),
+      body: JSON.stringify({ message }),
     }),
 };
 
