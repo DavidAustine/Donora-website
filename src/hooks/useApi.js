@@ -72,7 +72,6 @@ export function useStock() {
   return { stock, loading, error, refetch, updateStock };
 }
 
-// ─── Nearby requests hook ─────────────────────────────────────────────────────
 export function useNearbyRequests(lng, lat, radius = 10) {
   const fetcher = useCallback(
     () =>
@@ -88,6 +87,7 @@ export function useNearbyRequests(lng, lat, radius = 10) {
   ]);
   return { requests: data || [], loading, error, refetch };
 }
+
 
 // ─── Matches hook ─────────────────────────────────────────────────────────────
 export function useMatches() {

@@ -1,15 +1,25 @@
-.page { height: calc(100vh - 108px); display: flex; flex-direction: column; }
+.page {
+  height: calc(100vh - 108px);
+  display: flex;
+}
 
 .layout {
   display: grid;
   grid-template-columns: 280px 1fr;
-  border-radius: 16px;
+  flex: 1;
+  min-height: 0; /* VERY IMPORTANT */
   overflow: hidden;
+}
+.chatList {
+  overflow-y: auto;
   height: 100%;
 }
 
-/* ─── Chat list ───────────────────────────────────────────────────────────── */
-.chatList { display: flex; flex-direction: column; overflow-y: auto; }
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
 .chatListHeader {
   padding: 16px;
   display: flex;
@@ -51,7 +61,23 @@
 .chatItemSub   { font-size: 11px; }
 
 /* ─── Chat window ─────────────────────────────────────────────────────────── */
-.chatWindow { display: flex; flex-direction: column; height: 100%; min-width: 0; }
+.chatList {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.chatWindow {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
 
 .chatHeader {
   padding: 14px 20px;

@@ -1,274 +1,676 @@
-
-# 📘 **DOCUMENT 1: Advanced Networking & Infrastructure**
-
-## **1. Background**
-
-* **Demand**
-
-  * Surge of demands to **design, evaluate, manage, maintain sophisticated network infrastructures**
-  * **Big data**
-
-    * Processing and analyzing **massive amounts of data**
-    * Requires:
-
-      * **distributed file systems**
-      * **distributed databases**
-      * **cloud computing platforms**
-      * **Internet storage**
-  * **Cloud computing**
-
-    * Move IT operations to **Internet-connected infrastructure**
-    * Causes **drastic shift in networking requirements**
-
-* **Internet of Things (IoT)**
-
-  * Large numbers of objects using **standard communications architectures**
-  * **Billions of devices interconnected**
-  * Provides:
-
-    * **new interactions between physical world and computing**
-  * Applications:
-
-    * **healthcare, home automation, energy, farming, transportation, education**
-
-* **Mobile devices**
-
-  * **Indispensable part of enterprise IT infrastructure**
-  * Includes **BYOD**
-  * Creates **new demands on network planning and management**
-
-* **Capacity**
-
-  * **Gigabit data rate networks**
-
-    * Ethernet up to **100 Gbps**
-    * Wi-Fi ~ **7 Gbps**
-    * **4G and 5G networks**
-  * **High-speed, high-capacity servers**
-
-    * Needed for **multimedia and data processing**
-
-* **Complexity**
-
-  * Requires:
-
-    * **QoS (Quality of Service)**
-    * **QoE (Quality of Experience)**
-    * **flexible, manageable networking hardware**
-
-* **Security**
-
-  * Increasing need for **security services**
-
----
-
-## **2. Exploring the Network**
-
-* We are at a **critical turning point**
-* **Globalization of the Internet**
-* Changes:
-
-  * **social, commercial, political, personal interactions**
-* Internet used as **starting point for new products and services**
-
----
-
-## **3. Communicating in a Network-Centric World**
-
-### **Interconnecting our Lives**
-
-#### **Networks in Our Daily Lives**
-
-* Communication is **almost as important as air, water, food**
-* Networks:
-
-  * **connect people**
-  * **promote unregulated communication**
-* **Internet**
-
-  * Largest network
-  * Means **network of networks**
-  * Collection of **interconnected private and public networks**
-
----
-
-### **Technology Then and Now**
-
-* Before Internet:
-
-  * No **Google, YouTube, Facebook, online gaming**
-* Now:
-
-  * Share **photos, videos**
-  * **e-learning**
-  * **email, instant messaging**
-  * **online banking**
-  * **weather, traffic info**
-
----
-
-### **The Global Community**
-
-* Networking technologies:
-
-  * Reduce **geographic distances**
-* Creates:
-
-  * **global communities**
-  * **human network (Cisco)**
-
----
-
-### **Networks Support the Way We Learn**
-
-* Enable:
-
-  * **virtual classrooms**
-  * **on-demand video**
-  * **collaborative learning**
-  * **mobile learning**
-* Benefits:
-
-  * Removes **geographic barriers**
-  * Supports:
-
-    * **e-learning**
-    * **discussion groups**
-    * **course management**
-
----
-
-### **Networks Support the Way We Communicate**
-
-* Forms:
-
-  * **Instant Messaging (IM)**
-  * **Social Media**
-  * **Collaboration Tools**
-  * **Weblogs (blogs)**
-  * **Wikis**
-  * **Podcasting**
-  * **Peer-to-Peer (P2P) File Sharing**
-
----
-
-### **Networks Support the Way We Work**
-
-* Initially:
-
-  * Manage **financial info, customer info, payroll**
-* Now:
-
-  * Support:
-
-    * **email**
-    * **video**
-    * **messaging**
-    * **telephony**
-* Enable:
-
-  * **employee training**
-  * Reduce **cost and travel**
-
----
-
-## **4. Supporting Communication**
-
-### **Protocols (Rules of Communication)**
-
-* **Identified sender and receiver**
-* **Method of communicating**
-* **Common language and grammar**
-* **Speed and timing**
-* **Acknowledgement requirements**
-
----
-
-## **5. Quality of Communication**
-
-* Successful when:
-
-  * **message understood = intended meaning**
-* Issues caused by:
-
-  * **network factors**
-
-### **External QoS Factors**
-
-* **Quality of pathway**
-* **Number of transformations**
-* **Redirection/readdressing**
-* **Network traffic**
-* **Time allotted**
-
-### **Internal QoS Factors**
-
-* **Size of message**
-* **Complexity of message**
-* **Importance of message**
-
----
-
-## **6. The Networking Ecosystem**
-
-* Exists to provide **services to end users**
-* User platforms:
-
-  * **fixed (PC)**
-  * **portable (laptop)**
-  * **mobile (smartphone)**
-
-### **Access Facilities**
-
-* **DSL, cable modems**
-* **Wi-Fi, WiMAX**
-* **cellular networks**
-
-### **Providers**
-
-* **Application providers**
-
-  * Apps run on user device
-* **Application service providers**
-
-  * Software runs on **provider platform**
-  * Examples:
-
-    * **web servers**
-    * **email servers**
-    * **cloud computing provider**
-* **Content providers**
-
-  * Provide **data (email, music, video)**
-
-### **Additional Elements**
-
-* **Data center networking**
-
-  * Large number of interconnected servers
-* **IoT / fog networking**
-
-  * **machine-to-machine communication**
-
----
-
-# 🧠 **EXAM KEY POINTS (VERY IMPORTANT)**
-
-* **Big data + Cloud computing + IoT + Mobile devices = key drivers**
-* **Internet = network of networks**
-* **QoS vs QoE**
-* **External vs Internal QoS factors**
-* **Protocols = rules of communication**
-* **Forms of communication: IM, Social Media, Wikis, P2P**
-* **Networking ecosystem components:**
-
-  * Users
-  * Access facilities
-  * Application providers
-  * Service providers
-  * Content providers
-* **IoT = billions of interconnected devices**
-* **High-speed networks (Ethernet, Wi-Fi, 5G)**
-* **Data center networking + fog networking**
-
----
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useLocation } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
+import { useAuth } from "../../context/AuthContext";
+import { useMatches, useDirectThreads, useChat } from "../../hooks/useApi";
+import { userAPI } from "../../services/api";
+import { Icon, Spinner, EmptyState } from "../common/Common";
+import styles from "./Messages.module.css";
+
+// Location Protocol
+const LOCATION_PREFIX = "__LOC__:";
+const isLocMsg  = (text) => text?.startsWith(LOCATION_PREFIX);
+const parseLoc  = (text) => {
+  try { return JSON.parse(text.replace(LOCATION_PREFIX, "")); }
+  catch { return null; }
+};
+
+function deduplicateMatches(matches) {
+  const seen = new Set();
+  const out  = [];
+  for (const m of matches) {
+    if (m.status !== "active" && m.status !== "completed") continue;
+    const key = (m.participants || [])
+      .map((p) => (p._id || p).toString())
+      .sort()
+      .join("|");
+    if (!seen.has(key)) { seen.add(key); out.push(m); }
+  }
+  return out;
+}
+
+// ─── Resolve other participant synchronously (if populated) ──────────────────
+function resolveOther(match, currentUserId) {
+  if (!match?.participants) return { name: null, role: "—", id: null };
+  const other = match.participants.find((p) => {
+    const id = p._id || p;
+    return id && id.toString() !== currentUserId;
+  });
+  if (!other) return { name: null, role: "—", id: null };
+  const name = other.firstname
+    ? `${other.firstname} ${other.surname || ""}`.trim()
+    : other.name || null;
+  return { name, role: other.role || "—", id: other._id || (typeof other === "string" ? other : null) };
+}
+
+// ─── Hook: resolve other-user name (lazy fetch if not populated) ──────────────
+function useOtherUser(match, currentUserId) {
+  const [resolved, setResolved] = useState({ name: null, role: "—" });
+
+  useEffect(() => {
+    if (!match) return;
+    const { name, role, id } = resolveOther(match, currentUserId);
+    if (name) { setResolved({ name, role }); return; }
+    if (!id) return;
+    userAPI.getUserProfile(id)
+      .then((data) => {
+        const u = data?.user || data;
+        if (u?.firstname) {
+          setResolved({
+            name: `${u.firstname} ${u.surname || ""}`.trim(),
+            role: u.role || "—",
+          });
+        }
+      })
+      .catch(() => {});
+  }, [match?._id, currentUserId]);
+
+  return resolved;
+}
+
+// ─── Location Bubble ──────────────────────────────────────────────────────────
+function LocationBubble({ text, isMine, t }) {
+  const loc = parseLoc(text);
+  if (!loc) return null;
+  const { lat, lng, label } = loc;
+  const osmThumb = `https://staticmap.openstreetmap.de/staticmap.php?center=${lat},${lng}&zoom=15&size=260x120&markers=${lat},${lng},red-pushpin`;
+  const gmaps    = `https://www.google.com/maps?q=${lat},${lng}`;
+
+  return (
+    <a href={gmaps} target="_blank" rel="noopener noreferrer"
+      style={{
+        display: "block", borderRadius: 14, overflow: "hidden",
+        width: 240, textDecoration: "none",
+        border: "1px solid " + (isMine ? "rgba(255,255,255,0.3)" : t.border),
+      }}
+    >
+      <img src={osmThumb} alt="Location" onError={(e) => { e.target.style.display = "none"; }}
+        style={{ width: "100%", height: 110, objectFit: "cover", display: "block" }} />
+      <div style={{
+        display: "flex", alignItems: "center", gap: 6, padding: "6px 10px",
+        background: isMine ? "rgba(0,0,0,0.25)" : t.surface,
+        color: isMine ? "rgba(255,255,255,0.9)" : t.textMuted, fontSize: 11,
+      }}>
+        📍 {label || "Shared Location"} · Click to open in Maps
+      </div>
+    </a>
+  );
+}
+
+// ─── Chat list sidebar item ───────────────────────────────────────────────────
+function ChatListItem({ match, isActive, currentUserId, t, onClick, isDirect }) {
+  const { name, role } = useOtherUser(match, currentUserId);
+  const display    = name || "…";
+  const initials   = display !== "…"
+    ? display.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()
+    : "?";
+  const unread     = match.unreadCount || 0;
+  const dateStr    = new Date(match.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short" });
+
+  return (
+    <button
+      className={`${styles.chatListItem} ${isActive ? styles.chatListItemActive : ""}`}
+      style={{
+        background: isActive ? t.primary + "12" : "transparent",
+        borderLeft: "3px solid " + (isActive ? t.primary : "transparent"),
+        borderBottom: "1px solid " + t.border,
+      }}
+      onClick={onClick}
+    >
+      <div className={styles.chatItemAvatar} style={{ background: isDirect ? t.blue + "cc" : t.gradientRed }}>
+        {initials}
+      </div>
+      <div className={styles.chatItemInfo}>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <div className={styles.chatItemTitle} style={{ color: t.text }}>{display}</div>
+          {isDirect && (
+            <span style={{
+              fontSize: 9, fontWeight: 700, padding: "1px 6px", borderRadius: 20,
+              background: t.blue + "22", color: t.blue, border: "1px solid " + t.blue + "44",
+              flexShrink: 0,
+            }}>
+              Direct
+            </span>
+          )}
+        </div>
+        <div className={styles.chatItemSub} style={{ color: t.textMuted }}>
+          {role !== "—" ? role.charAt(0).toUpperCase() + role.slice(1) + " · " : ""}
+          {dateStr}
+        </div>
+      </div>
+      {unread > 0 && (
+        <div style={{
+          minWidth: 20, height: 20, borderRadius: 10, background: t.primary,
+          color: "#fff", fontSize: 10, fontWeight: 700,
+          display: "flex", alignItems: "center", justifyContent: "center", padding: "0 5px",
+        }}>
+          {unread}
+        </div>
+      )}
+    </button>
+  );
+}
+
+// ─── Chat window ──────────────────────────────────────────────────────────────
+function ChatWindow({ match, t, currentUserId, isDirect }) {
+  // Pass isDirect so useChat fetches from the correct endpoint and sends
+  // to the correct route — this is what was broken for direct threads.
+  const { messages, loading, sendMessage } = useChat(match?._id, isDirect);
+  const { name: otherName, role: otherRole } = useOtherUser(match, currentUserId);
+
+  const [input,       setInput]       = useState("");
+  const [sending,     setSending]     = useState(false);
+  const [sendingLoc,  setSendingLoc]  = useState(false);
+  const [ttsEnabled,  setTtsEnabled]  = useState(false);
+  const [sttActive,   setSttActive]   = useState(false);
+
+  const bottomRef      = useRef(null);
+  const recognitionRef = useRef(null);
+  const lastReadRef    = useRef(null);
+
+  // Auto-scroll on new messages
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  // TTS: speak last incoming message when TTS is enabled
+  useEffect(() => {
+    if (!ttsEnabled || !messages.length || !window.speechSynthesis) return;
+    const last = messages[messages.length - 1];
+    if (!last || isLocMsg(last.message)) return;
+    const senderId = last.sender?._id || last.sender;
+    if (senderId?.toString() === currentUserId) return;       // don't speak own msgs
+    if (last._id === lastReadRef.current) return;             // already spoken
+    lastReadRef.current = last._id;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(new window.SpeechSynthesisUtterance(last.message));
+  }, [messages, ttsEnabled, currentUserId]);
+
+  // ── STT via Web Speech API (Chrome/Edge) ─────────────────────────────────
+  const startSTT = useCallback(() => {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) { alert("Speech recognition is only supported in Chrome or Edge."); return; }
+    const rec = new SR();
+    rec.lang = "en-US"; rec.continuous = false; rec.interimResults = false;
+    rec.onresult = (e) => {
+      const t = e.results[0]?.[0]?.transcript || "";
+      if (t) setInput((prev) => prev ? prev + " " + t : t);
+    };
+    rec.onend   = () => setSttActive(false);
+    rec.onerror = () => setSttActive(false);
+    recognitionRef.current = rec;
+    rec.start();
+    setSttActive(true);
+  }, []);
+
+  const stopSTT = useCallback(() => {
+    recognitionRef.current?.stop();
+    setSttActive(false);
+  }, []);
+
+  // ── Share location ────────────────────────────────────────────────────────
+  const shareLocation = () => {
+    if (!navigator.geolocation) { alert("Geolocation is not supported in this browser."); return; }
+    setSendingLoc(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const payload = JSON.stringify({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+          label: "My Location",
+        });
+        try { await sendMessage(LOCATION_PREFIX + payload); }
+        catch (e) { alert(e.message); }
+        finally { setSendingLoc(false); }
+      },
+      () => { alert("Could not get your location. Check browser permissions."); setSendingLoc(false); }
+    );
+  };
+
+  // ── Send text ─────────────────────────────────────────────────────────────
+  const handleSend = async () => {
+    const trimmed = input.trim();
+    if (!trimmed || !match?._id) return;
+    setSending(true);
+    setInput("");
+    try {
+      await sendMessage(trimmed);
+      if (ttsEnabled && !isLocMsg(trimmed) && window.speechSynthesis) {
+        window.speechSynthesis.speak(new window.SpeechSynthesisUtterance(trimmed));
+      }
+    } catch (e) { alert(e.message); }
+    finally { setSending(false); }
+  };
+
+  const req      = match?.request || {};
+  const initials = otherName && otherName !== "…"
+    ? otherName.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()
+    : "?";
+
+  return (
+    <div className={styles.chatWindow}>
+      {/* ── Header ── */}
+      <div className={styles.chatHeader}
+        style={{ borderBottom: "1px solid " + t.border, background: t.surface }}>
+        <div className={styles.chatAvatar} style={{ background: isDirect ? t.blue + "cc" : t.gradientRed }}>
+          {initials}
+        </div>
+        <div className={styles.chatHeaderInfo}>
+          <div className={styles.chatHeaderTitle} style={{ color: t.text }}>
+            {otherName || "Loading…"}
+          </div>
+          <div className={styles.chatHeaderSub} style={{ color: t.textMuted }}>
+            <span className={styles.onlineDot} />
+            {otherRole !== "—" ? otherRole.charAt(0).toUpperCase() + otherRole.slice(1) : "Participant"}
+            {req.requiredBloodType ? " · " + req.requiredBloodType : ""}
+            {req.unitsNeeded ? " · " + req.unitsNeeded + " units" : ""}
+          </div>
+        </div>
+
+        {/* Hold-to-talk STT button */}
+        <button
+          title="Hold to dictate (Chrome/Edge)"
+          onMouseDown={startSTT} onMouseUp={stopSTT}
+          onTouchStart={startSTT} onTouchEnd={stopSTT}
+          style={{
+            border: "none", borderRadius: 8, cursor: "pointer", fontSize: 18,
+            padding: "6px 10px", transition: "background 0.15s",
+            background: sttActive ? t.primary + "22" : t.bgDark,
+            color:      sttActive ? t.primary : t.textMuted,
+          }}
+        >
+          {sttActive ? "🎙️" : "🎤"}
+        </button>
+
+        {/* TTS toggle */}
+        <button
+          title={ttsEnabled ? "Disable read-aloud" : "Enable read-aloud"}
+          onClick={() => { setTtsEnabled((v) => !v); window.speechSynthesis?.cancel(); }}
+          style={{
+            border: "none", borderRadius: 8, cursor: "pointer", fontSize: 18,
+            padding: "6px 10px", transition: "background 0.15s",
+            background: ttsEnabled ? t.primary + "22" : t.bgDark,
+            color:      ttsEnabled ? t.primary : t.textMuted,
+          }}
+        >
+          {ttsEnabled ? "🔊" : "🔇"}
+        </button>
+
+        <div className={styles.chatHeaderBadge} style={{
+          background: isDirect ? t.blue + "18" : req.isEmergency ? t.primary + "18" : t.blue + "14",
+          color:  isDirect ? t.blue : req.isEmergency ? t.primary : t.blue,
+          border: "1px solid " + (isDirect ? t.blue + "30" : req.isEmergency ? t.primary + "30" : t.blue + "30"),
+        }}>
+          {isDirect ? "💬 Direct" : req.isEmergency ? "⚡ Emergency" : "Standard"}
+        </div>
+      </div>
+
+      {/* ── Messages ── */}
+      <div className={styles.messages}>
+        {loading ? (
+          <Spinner label="Loading messages…" />
+        ) : messages.length === 0 ? (
+          <EmptyState icon="messages" title="No messages yet" message="Be the first to say something!" />
+        ) : (
+          messages.map((msg, i) => {
+            const senderId = msg.sender?._id || msg.sender;
+            const isMine   = senderId && senderId.toString() === currentUserId;
+            const sName    = !isMine && msg.sender?.firstname
+              ? `${msg.sender.firstname} ${msg.sender.surname || ""}`.trim()
+              : null;
+
+            return (
+              <div key={msg._id || i}
+                className={`${styles.bubble} ${isMine ? styles.bubbleMe : styles.bubbleThem}`}>
+                {sName && (
+                  <div className={styles.senderName} style={{ color: t.textMuted }}>{sName}</div>
+                )}
+                {isLocMsg(msg.message) ? (
+                  <LocationBubble text={msg.message} isMine={isMine} t={t} />
+                ) : (
+                  <div className={styles.bubbleInner} style={{
+                    background: isMine ? t.gradientRed : t.bgDark,
+                    color:      isMine ? "#fff"        : t.text,
+                    borderRadius: isMine ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
+                  }}>
+                    <div className={styles.bubbleText}>{msg.message}</div>
+                    <div className={styles.bubbleTime} style={{ opacity: 0.6 }}>
+                      {new Date(msg.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })
+        )}
+        <div ref={bottomRef} />
+      </div>
+
+      {/* STT status bar */}
+      {sttActive && (
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "center",
+          gap: 8, padding: "4px 0", background: t.bgDark,
+          fontSize: 12, color: t.textMuted,
+        }}>
+          <span style={{ width: 8, height: 8, borderRadius: "50%",
+            background: t.primary, display: "inline-block" }} />
+          Listening… release button to transcribe
+        </div>
+      )}
+
+      {/* ── Input row ── */}
+      <div className={styles.inputRow}
+        style={{ borderTop: "1px solid " + t.border, background: t.surface }}>
+        {/* Location share */}
+        <button
+          title="Share my location"
+          onClick={shareLocation}
+          disabled={sendingLoc}
+          style={{
+            border: "1px solid " + t.border, borderRadius: 10, cursor: "pointer",
+            background: t.bgDark, color: t.primary, padding: "8px 10px",
+            fontSize: 18, opacity: sendingLoc ? 0.5 : 1,
+          }}
+        >
+          📍
+        </button>
+
+        <input
+          className={styles.messageInput}
+          style={{ background: t.bgDark, border: "1px solid " + t.border, color: t.text }}
+          placeholder={sttActive ? "Listening…" : "Type a message…"}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
+          disabled={sending}
+        />
+
+        <button
+          className={styles.sendBtn}
+          style={{ background: t.gradientRed, boxShadow: "0 4px 12px " + t.shadowRed }}
+          onClick={handleSend}
+          disabled={sending || !input.trim()}
+        >
+          <Icon name="send" size={16} color="#fff" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Messages page ───────────────────────────────────────────────────────
+export default function Messages() {
+  const { t }          = useTheme();
+  const { user }       = useAuth();
+  const location       = useLocation();
+  const { matches, loading: matchLoading }           = useMatches();
+  const { threads: directThreads, loading: directLoading } = useDirectThreads();
+
+  const currentUserId  = user?._id || user?.id || "";
+
+  // Show spinner only on the very first load of both lists
+  const loading = matchLoading && directLoading;
+
+  // Deduplicate match-based chats by participant pair (client-side defence)
+  const chatMatches = deduplicateMatches(matches);
+
+  // Merge match-based chats and direct threads into one unified list,
+  // sorted newest-first. Direct threads get _isDirect=true so the sidebar
+  // and ChatWindow know which fetch/send path to use.
+  const allChats = [
+    ...chatMatches.map((m) => ({ ...m, _isDirect: false })),
+    ...directThreads.map((t) => ({ ...t, _isDirect: true })),
+  ].sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt));
+
+  const totalUnread = allChats.reduce((s, m) => s + (m.unreadCount || 0), 0);
+
+  // activeId — driven by navigation state (clicking Chat from Matches page)
+  // or defaults to first item.
+  const [activeId, setActiveId] = useState(null);
+
+  // React to navigation state changes (e.g., clicking "Chat" from Matches page
+  // multiple times — each time we must pick up the new matchId)
+  useEffect(() => {
+    if (location.state?.matchId) {
+      setActiveId(location.state.matchId);
+    }
+  }, [location.state?.matchId, location.key]); // location.key changes on every navigate()
+
+  // Default to first chat once data loads (only if nothing set by nav state)
+  useEffect(() => {
+    if (!activeId && allChats.length > 0) {
+      setActiveId(allChats[0]._id);
+    }
+  }, [allChats.length]); // eslint-disable-line
+
+  const activeChat  = allChats.find((m) => m._id === activeId) || null;
+  const activeIsDirect = activeChat?._isDirect ?? false;
+
+  if (loading) return <Spinner label="Loading chats…" />;
+  if (allChats.length === 0)
+    return (
+      <EmptyState
+        icon="messages"
+        title="No active chats"
+        message="Match with a donor or blood bank to start chatting."
+      />
+    );
+
+  return (
+    <div className={styles.page}>
+      <div className={styles.layout} style={{ border: "1px solid " + t.border }}>
+        {/* Sidebar */}
+        <div className={styles.chatList}
+          style={{ background: t.surface, borderRight: "1px solid " + t.border }}>
+          <div className={styles.chatListHeader}
+            style={{ borderBottom: "1px solid " + t.border }}>
+            <span style={{ color: t.text, fontWeight: 700, fontSize: 15 }}>Chats</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              {totalUnread > 0 && (
+                <span style={{
+                  background: t.primary, color: "#fff",
+                  fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 999,
+                }}>
+                  {totalUnread}
+                </span>
+              )}
+              <span className={styles.chatCount}
+                style={{ background: t.primary + "18", color: t.primary }}>
+                {allChats.length}
+              </span>
+            </div>
+          </div>
+
+          {allChats.map((m) => (
+            <ChatListItem
+              key={m._id}
+              match={m}
+              isActive={m._id === activeId}
+              currentUserId={currentUserId}
+              isDirect={m._isDirect}
+              t={t}
+              onClick={() => setActiveId(m._id)}
+            />
+          ))}
+        </div>
+
+        {/* Chat panel */}
+        {activeChat ? (
+          <ChatWindow
+            key={activeChat._id}
+            match={activeChat}
+            t={t}
+            currentUserId={currentUserId}
+            isDirect={activeIsDirect}
+          />
+        ) : (
+          <div className={styles.noChat} style={{ background: t.surface, color: t.textMuted }}>
+            Select a conversation to open
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+Messages.module.css
+.page { height: calc(100vh - 108px); display: flex; flex-direction: column; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.chatList { display: flex; flex-direction: column; overflow-y: auto; }
+.chatListHeader {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.chatCount {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.chatListItem {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.chatItemAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+}
+.chatItemInfo { flex: 1; min-width: 0; }
+.chatItemTitle { font-weight: 600; font-size: 13px; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chatItemSub   { font-size: 11px; }
+
+/* ─── Chat window ─────────────────────────────────────────────────────────── */
+.chatWindow { display: flex; flex-direction: column; height: 100%; min-width: 0; }
+
+.chatHeader {
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.chatAvatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 800; font-size: 12px; flex-shrink: 0;
+}
+.chatHeaderInfo { flex: 1; min-width: 0; }
+.chatHeaderTitle { font-weight: 700; font-size: 14px; }
+.chatHeaderSub  { font-size: 11px; display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+.onlineDot { width: 6px; height: 6px; border-radius: 50%; background: #41C343; flex-shrink: 0; }
+.chatHeaderBadge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ─── Messages area ───────────────────────────────────────────────────────── */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bubble { display: flex; flex-direction: column; }
+.bubbleMe   { align-items: flex-end; }
+.bubbleThem { align-items: flex-start; }
+.senderName { font-size: 10px; margin-bottom: 3px; }
+
+.bubbleInner {
+  max-width: 60%;
+  padding: 10px 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.bubbleText { font-size: 14px; line-height: 1.5; }
+.bubbleTime { font-size: 10px; margin-top: 4px; }
+.bubbleMe   .bubbleTime { text-align: right; }
+
+/* ─── Input ───────────────────────────────────────────────────────────────── */
+.inputRow {
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.messageInput {
+  flex: 1;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+.messageInput:focus { border-color: #E8192C !important; }
+.sendBtn {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+.sendBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.noChat {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page   { height: calc(100vh - 60px - 64px); }
+  .layout { grid-template-columns: 1fr; }
+  .chatList { display: none; }
+  .chatList.showList { display: flex; }
+}
+
+/* ─── Notification badge improvements ───────────────────────────────────────── */
+.chatListItemActive .chatItemTitle { font-weight: 700; }
+
+/* ─── TTS button ─────────────────────────────────────────────────────────────── */
+.ttsBtn {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 6px 10px;
+  font-size: 18px;
+  transition: background 0.15s;
+}

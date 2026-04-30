@@ -7,7 +7,7 @@ import { userAPI } from "../../services/api";
 import { Icon, Spinner, EmptyState } from "../common/Common";
 import styles from "./Messages.module.css";
 
-// ─── Location message protocol ────────────────────────────────────────────────
+// Location Protocol
 const LOCATION_PREFIX = "__LOC__:";
 const isLocMsg  = (text) => text?.startsWith(LOCATION_PREFIX);
 const parseLoc  = (text) => {
@@ -15,10 +15,6 @@ const parseLoc  = (text) => {
   catch { return null; }
 };
 
-// ─── Deduplicate match list by participant pair ───────────────────────────────
-// Keeps the newest active match per unique sorted participant-ID pair.
-// This mirrors the deduplication now done on the backend, giving two layers
-// of defence against the "duplicate chat" bug.
 function deduplicateMatches(matches) {
   const seen = new Set();
   const out  = [];
