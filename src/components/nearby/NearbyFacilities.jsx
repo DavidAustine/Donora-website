@@ -1,17 +1,3 @@
-/**
- * src/components/nearby/NearbyFacilities.jsx
- *
- * Shows nearby blood banks / medical facilities WITH their inventory,
- * and nearby available donors. Users can start a chat with any of them.
- *
- * Key features:
- *  - Tab switcher: Facilities | Donors
- *  - Each facility card shows their live blood stock inventory
- *  - "Chat" button starts or opens a direct conversation
- *  - Radius filter (5 / 10 / 20 / 50 km)
- *  - Colour-coded stock: critical (red) / low (amber) / adequate (green)
- */
-
 import { useState, useCallback, useEffect } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { useGeolocation } from "../../hooks/useApi";

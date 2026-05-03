@@ -1,14 +1,4 @@
-/**
- * src/components/my-requests/MyRequests.jsx
- *
- * Allows a blood bank / medical facility to:
- *  1. Submit a new blood request on behalf of a patient
- *  2. Track all requests they have submitted
- *  3. Cancel pending requests
- *
- * This page is NOT visible to other facilities on the Requests page —
- * the backend filters out requests made by the same facility.
- */
+
 
 import { useState, useCallback } from "react";
 import { useTheme } from "../../context/ThemeContext";
