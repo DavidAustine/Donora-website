@@ -1,0 +1,267 @@
+.page {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.pageTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: -0.3px;
+}
+
+.pageSub {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.refreshBtn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.refreshBtn:hover { opacity: 0.75; }
+
+/* ── Form card ──────────────────────────────────────────────────────────────── */
+.formCard {
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.formTitle {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.formDesc {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0 0 18px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 560px) {
+  .formGrid { grid-template-columns: 1fr; }
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.select,
+.input {
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+.select:focus,
+.input:focus {
+  border-color: #E8192C !important;
+}
+
+.emergencyToggle {
+  display: flex;
+  align-items: center;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #E8192C;
+  cursor: pointer;
+}
+
+.toggleText {
+  display: flex;
+  align-items: center;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.15s, transform 0.1s;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+.submitBtn:hover:not(:disabled) { opacity: 0.88; transform: translateY(-1px); }
+.submitBtn:disabled { cursor: not-allowed; }
+
+.spinnerDot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Tabs ───────────────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.tab:hover { opacity: 0.8; }
+.tabActive { }
+
+/* ── Request cards ──────────────────────────────────────────────────────────── */
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reqCard {
+  border-radius: 14px;
+  padding: 16px 18px;
+  transition: box-shadow 0.2s;
+}
+
+.cardRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cardLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.emergencyTag {
+  background: #E8192C18;
+  color: #E8192C;
+  border: 1px solid #E8192C30;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.matchedNote {
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.expandBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+}
+
+.expandedBlock {
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 8px;
+}
+
+.cancelBtn {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+.cancelBtn:hover:not(:disabled) { opacity: 0.7; }
+.cancelBtn:disabled { cursor: not-allowed; opacity: 0.5; }

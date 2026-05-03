@@ -1,0 +1,299 @@
+.page {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pageTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: -0.3px;
+}
+
+.pageSub {
+  font-size: 13px;
+  margin: 0;
+}
+
+.headerRight {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.radiusSelect {
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  outline: none;
+}
+
+.refreshBtn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+.refreshBtn:hover { opacity: 0.75; }
+
+.locating {
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.successBanner {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab:hover { opacity: 0.85; }
+.tabActive {}
+
+.tabCount {
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ── Legend ─────────────────────────────────────────────────────────────────── */
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 4px;
+}
+
+/* ── Grid ───────────────────────────────────────────────────────────────────── */
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Facility / Donor card ──────────────────────────────────────────────────── */
+.facilityCard {
+  border-radius: 16px;
+  padding: 18px 20px;
+  transition: box-shadow 0.2s;
+}
+.facilityCard:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.facilityIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.facilityInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.facilityName {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.verifiedBadge {
+  background: #22c55e18;
+  color: #22c55e;
+  border: 1px solid #22c55e30;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.facilityPhone {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chatBtn {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  font-family: inherit;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.chatBtn:hover:not(:disabled) { opacity: 0.85; transform: translateY(-1px); }
+.chatBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.miniSpinner {
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Stock ──────────────────────────────────────────────────────────────────── */
+.stockSummary {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.stockPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.stockPill {
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.noStock {
+  font-size: 12px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.expandBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  margin-bottom: 4px;
+}
+
+.stockTable {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.stockRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 6px;
+}
+
+.barWrap {
+  flex: 1;
+}
+
+.barBg {
+  height: 6px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+
+/* ── Donor ──────────────────────────────────────────────────────────────────── */
+.donorMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.availableBadge {
+  background: #22c55e18;
+  color: #22c55e;
+  border: 1px solid #22c55e30;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
