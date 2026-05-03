@@ -139,7 +139,7 @@ function NewRequestForm({ onSubmitted, lng, lat }) {
       <button
         className={styles.submitBtn}
         style={{
-          background: form.isEmergency ? t.gradientRed : t.gradientPrimary || t.gradientRed,
+          background: t.gradientRed,
           opacity: loading ? 0.7 : 1,
         }}
         onClick={handleSubmit}
