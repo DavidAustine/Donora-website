@@ -327,7 +327,7 @@ export default function AppLayout() {
           </button>
 
           <div className={styles.topbarTitle} style={{ color: t.text }}>
-            Blood Bank Dashboard
+            Medical Facility Dashboard
           </div>
 
           <div className={styles.topbarActions}>

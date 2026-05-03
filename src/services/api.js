@@ -166,7 +166,6 @@ export const matchAPI = {
 
 // ─── CHAT ─────────────────────────────────────────────────────────────────────
 export const chatAPI = {
-  // Match-based chat (existing)
   getMessages: (matchId) => apiFetch(`/chat/${matchId}`),
   sendMessage: (matchId, message) =>
     apiFetch("/chat", {
