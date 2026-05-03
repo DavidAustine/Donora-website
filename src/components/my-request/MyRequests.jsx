@@ -303,6 +303,7 @@ export default function MyRequests() {
 
   const submitted = requests?.submitted || [];
   const accepted = requests?.accepted || [];
+  const requestMade = requests.cancelled || []
   const current = tab === "submitted" ? submitted : accepted;
 
   return (
@@ -337,6 +338,7 @@ export default function MyRequests() {
         {[
           { key: "submitted", label: `Submitted (${submitted.length})` },
           { key: "accepted", label: `Accepted by Us (${accepted.length})` },
+          {key: "request made", label: `Request Made (${requestMade.length})`}
         ].map(({ key, label }) => (
           <button
             key={key}
