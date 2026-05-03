@@ -51,7 +51,7 @@ export default function Requests() {
         <div>
           <h2 className={styles.pageTitle} style={{ color: t.text }}>Nearby Requests</h2>
           <p className={styles.pageSub} style={{ color: t.textMuted }}>
-            Blood requests within {radius}km of your location
+            Blood requests within {radius}km · Excludes requests your facility submitted
           </p>
         </div>
         <div className={styles.headerActions}>

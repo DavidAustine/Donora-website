@@ -25,12 +25,14 @@ import { io } from "socket.io-client";
 const BASE_SOCKET_URL = "https://donorabackend.onrender.com"; // same host, no /api
 
 const NAV_ITEMS = [
-  { path: "/dashboard", label: "Dashboard", icon: "dashboard" },
-  { path: "/request",   label: "Requests",  icon: "requests"  },
-  { path: "/matches",   label: "Matches",   icon: "matches"   },
-  { path: "/messages",  label: "Messages",  icon: "messages"  },
-  { path: "/inventory", label: "Inventory", icon: "inventory" },
-  { path: "/profile",   label: "Profile",   icon: "profile"   },
+  { path: "/dashboard",   label: "Dashboard",   icon: "dashboard" },
+  { path: "/request",     label: "Requests",    icon: "requests"  },
+  { path: "/my-requests", label: "My Requests", icon: "check"     },
+  { path: "/nearby",      label: "Nearby",      icon: "matches"   },
+  { path: "/matches",     label: "Matches",     icon: "matches"   },
+  { path: "/messages",    label: "Messages",    icon: "messages"  },
+  { path: "/inventory",   label: "Inventory",   icon: "inventory" },
+  { path: "/profile",     label: "Profile",     icon: "profile"   },
 ];
 
 // ─── Emergency Toast ──────────────────────────────────────────────────────────

@@ -116,16 +116,44 @@ export const bloodBankAPI = {
       body: JSON.stringify(updates),
     }),
 
-  // Get nearby blood banks (public — for patient-facing map features)
+  // Nearby blood banks (basic, public — no auth needed for patient app)
   getNearby: (lng, lat, radius = 10) =>
     apiFetch(`/bloodbank/nearby?lng=${lng}&lat=${lat}&radius=${radius}`),
+
+  // Nearby blood banks WITH their stock levels (authenticated, excludes self)
+  // Used by the "Nearby Facilities" page
+  getNearbyWithStock: (lng, lat, radius = 20) =>
+    apiFetch(
+      `/bloodbank/nearby-with-stock?lng=${lng}&lat=${lat}&radius=${radius}`,
+    ),
+
+  // Get a specific blood bank's stock inventory
+  getBankStock: (bankId) => apiFetch(`/bloodbank/${bankId}/stock`),
 };
 
 // ─── REQUESTS ─────────────────────────────────────────────────────────────────
 export const requestAPI = {
-  // Blood bank: get nearby patient requests
+  // Blood bank or patient: get nearby pending requests (excludes own requests for bloodbank)
   getNearby: (lng, lat, radius = 10) =>
     apiFetch(`/requests/nearby?lng=${lng}&lat=${lat}&radius=${radius}`),
+
+  // Get my own submitted requests (patient OR bloodbank) for tracking
+  getMyRequests: () => apiFetch("/requests/mine"),
+
+  // Create a blood request — allowed for patient and bloodbank roles
+  createRequest: (payload) =>
+    apiFetch("/requests", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+
+  // Cancel a request I submitted
+  cancelRequest: (requestId) =>
+    apiFetch(`/requests/cancel/${requestId}`, { method: "PATCH" }),
+
+  // Public: all pending requests in a wider area (for nearby facilities feature)
+  getPublicRequests: (lng, lat, radius = 50) =>
+    apiFetch(`/requests/public?lng=${lng}&lat=${lat}&radius=${radius}`),
 };
 
 // ─── MATCHES ──────────────────────────────────────────────────────────────────
@@ -147,22 +175,24 @@ export const chatAPI = {
     }),
 
   // Direct threads — used when the mobile app messages the blood bank
-  // without a formal match. The blood bank web dashboard reads these
-  // so that those conversations are visible on both sides.
   getMyDirectThreads: () => apiFetch("/chat/direct/my-threads"),
   getDirectThreadMessages: (threadId) =>
     apiFetch(`/chat/direct/${threadId}/messages`),
-  // Send to the direct-thread route so the backend validates against
-  // DirectConversation, not Match (which caused the "Match not found" error).
   sendDirectMessage: (threadId, message) =>
     apiFetch(`/chat/direct/${threadId}/messages`, {
       method: "POST",
       body: JSON.stringify({ message }),
     }),
+
+  // Start a direct conversation with another blood bank / donor by userId
+  startDirectThread: (recipientId) =>
+    apiFetch("/chat/direct/start", {
+      method: "POST",
+      body: JSON.stringify({ recipientId }),
+    }),
 };
 
 // ─── USER ─────────────────────────────────────────────────────────────────────
-// FIX: was "/user/me" — backend mounts user routes at /api/users (plural)
 export const userAPI = {
   getMyProfile: () => apiFetch("/users/me"),
   getUserProfile: (userId) => apiFetch(`/users/${userId}`),
@@ -176,6 +206,13 @@ export const userAPI = {
       method: "PATCH",
       body: JSON.stringify({ lng, lat }),
     }),
+};
+
+// ─── DONORS ───────────────────────────────────────────────────────────────────
+export const donorAPI = {
+  getNearbyDonors: (lng, lat, radius = 10) =>
+    apiFetch(`/donors/nearby?lng=${lng}&lat=${lat}&radius=${radius}`),
+  getDonorProfile: (userId) => apiFetch(`/donors/${userId}`),
 };
 
 // ─── SOS ──────────────────────────────────────────────────────────────────────

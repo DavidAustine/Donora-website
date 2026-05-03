@@ -1,13 +1,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import AppLayout from "./components/layout/AppLayout";
-import Login     from "./pages/Login";
-import DashBoard from "./pages/DashBoard";
-import Messages  from "./pages/Messages";
-import Matches   from "./pages/Matches";
-import Profile   from "./pages/Profile";
-import Inventory from "./pages/Inventory";
-import Request   from "./pages/Request";
+import Login        from "./pages/Login";
+import DashBoard    from "./pages/DashBoard";
+import Messages     from "./pages/Messages";
+import Matches      from "./pages/Matches";
+import Profile      from "./pages/Profile";
+import Inventory    from "./pages/Inventory";
+import Request      from "./pages/Request";
+import MyRequests   from "./pages/MyRequests";
+import Nearby       from "./pages/Nearby";
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
@@ -35,12 +37,14 @@ export default function App() {
         <Route element={
           <ProtectedRoute><AppLayout /></ProtectedRoute>
         }>
-          <Route path="/dashboard" element={<DashBoard />} />
-          <Route path="/request"   element={<Request />} />
-          <Route path="/matches"   element={<Matches />} />
-          <Route path="/messages"  element={<Messages />} />
-          <Route path="/inventory" element={<Inventory />} />
-          <Route path="/profile"   element={<Profile />} />
+          <Route path="/dashboard"   element={<DashBoard />} />
+          <Route path="/request"     element={<Request />} />
+          <Route path="/my-requests" element={<MyRequests />} />
+          <Route path="/nearby"      element={<Nearby />} />
+          <Route path="/matches"     element={<Matches />} />
+          <Route path="/messages"    element={<Messages />} />
+          <Route path="/inventory"   element={<Inventory />} />
+          <Route path="/profile"     element={<Profile />} />
         </Route>
 
         {/* Fallback */}
