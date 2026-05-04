@@ -153,8 +153,7 @@ function ChatListItem({ match, isActive, currentUserId, t, onClick, isDirect }) 
 
 // ─── Chat window ──────────────────────────────────────────────────────────────
 function ChatWindow({ match, t, currentUserId, isDirect }) {
-  // Pass isDirect so useChat fetches from the correct endpoint and sends
-  // to the correct route — this is what was broken for direct threads.
+
   const { messages, loading, sendMessage } = useChat(match?._id, isDirect);
   const { name: otherName, role: otherRole } = useOtherUser(match, currentUserId);
 
@@ -249,7 +248,6 @@ function ChatWindow({ match, t, currentUserId, isDirect }) {
 
   return (
     <div className={styles.chatWindow}>
-      {/* ── Header ── */}
       <div className={styles.chatHeader}
         style={{ borderBottom: "1px solid " + t.border, background: t.surface }}>
         <div className={styles.chatAvatar} style={{ background: isDirect ? t.blue + "cc" : t.gradientRed }}>
@@ -267,8 +265,7 @@ function ChatWindow({ match, t, currentUserId, isDirect }) {
           </div>
         </div>
 
-        {/* Hold-to-talk STT button */}
-        <button
+        {/* <button
           title="Hold to dictate (Chrome/Edge)"
           onMouseDown={startSTT} onMouseUp={stopSTT}
           onTouchStart={startSTT} onTouchEnd={stopSTT}
@@ -280,7 +277,7 @@ function ChatWindow({ match, t, currentUserId, isDirect }) {
           }}
         >
           {sttActive ? "🎙️" : "🎤"}
-        </button>
+        </button> */}
 
         {/* TTS toggle */}
         <button
