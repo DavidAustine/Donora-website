@@ -183,12 +183,10 @@ export const chatAPI = {
       body: JSON.stringify({ message }),
     }),
 
-  // Start a direct conversation with another blood bank / donor by userId
+  // Find or create a direct conversation thread with another user.
+  // Uses GET /chat/direct/thread/:otherId — matches the backend route exactly.
   startDirectThread: (recipientId) =>
-    apiFetch("/chat/direct/start", {
-      method: "POST",
-      body: JSON.stringify({ recipientId }),
-    }),
+    apiFetch(`/chat/direct/thread/${recipientId}`),
 };
 
 // ─── USER ─────────────────────────────────────────────────────────────────────
