@@ -138,14 +138,22 @@ export default function Requests() {
                   )}
                 </div>
 
-                {req.patient && (
+                {/* Requester row — show facility name or patient name */}
+                {req.requestedByRole === "bloodbank" ? (
+                  <div className={styles.patientRow} style={{ color: t.textMuted, fontSize: 12 }}>
+                    Medical facility:{" "}
+                    <strong style={{ color: t.text }}>
+                      {req.requestedByFacility?.name || "Unknown facility"}
+                    </strong>
+                  </div>
+                ) : req.patient ? (
                   <div className={styles.patientRow} style={{ color: t.textMuted, fontSize: 12 }}>
                     Patient: {req.patient.firstname} {req.patient.surname}
                     {req.patient.bloodType && (
                       <span> · Blood type: <strong style={{ color: t.text }}>{req.patient.bloodType}</strong></span>
                     )}
                   </div>
-                )}
+                ) : null}
 
                 {/* See details expandable section */}
                 <button
@@ -167,12 +175,20 @@ export default function Requests() {
                     <div><strong style={{ color: t.text }}>Blood Type:</strong> {req.requiredBloodType}</div>
                     <div><strong style={{ color: t.text }}>Units Needed:</strong> {req.unitsNeeded}</div>
                     <div><strong style={{ color: t.text }}>Status:</strong> {req.status}</div>
-                    {req.patient && (
-                      <div><strong style={{ color: t.text }}>Patient:</strong> {req.patient.firstname} {req.patient.surname}
+                    {req.requestedByRole === "bloodbank" ? (
+                      <div>
+                        <strong style={{ color: t.text }}>Medical Facility:</strong>{" "}
+                        {req.requestedByFacility?.name || "Unknown facility"}
+                        {req.requestedByFacility?.phone ? ` · ${req.requestedByFacility.phone}` : ""}
+                      </div>
+                    ) : req.patient ? (
+                      <div>
+                        <strong style={{ color: t.text }}>Patient:</strong>{" "}
+                        {req.patient.firstname} {req.patient.surname}
                         {req.patient.bloodType ? ` (${req.patient.bloodType})` : ""}
                       </div>
-                    )}
-                    {req.patient?.phone && (
+                    ) : null}
+                    {req.patient?.phone && req.requestedByRole !== "bloodbank" && (
                       <div><strong style={{ color: t.text }}>Phone:</strong> {req.patient.phone}</div>
                     )}
                     <div><strong style={{ color: t.text }}>Posted:</strong> {timeAgo(req.createdAt)}</div>

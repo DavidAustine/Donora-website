@@ -46,8 +46,10 @@ function NewRequestForm({ onSubmitted, lng, lat }) {
         lng,
         lat,
       });
+      const wasEmergency = form.isEmergency;
+      const bloodType = form.requiredBloodType;
       setForm({ requiredBloodType: "", unitsNeeded: "", patientNote: "", isEmergency: false });
-      onSubmitted();
+      onSubmitted({ wasEmergency, bloodType });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -258,6 +260,7 @@ export default function MyRequests() {
   const [error, setError] = useState(null);
   const [cancelling, setCancelling] = useState(null);
   const [tab, setTab] = useState("submitted"); // "submitted" | "accepted"
+  const [submitSuccess, setSubmitSuccess] = useState(null);
 
   const fetchRequests = useCallback(async () => {
     setLoading(true);
@@ -329,8 +332,41 @@ export default function MyRequests() {
       )}
       {error && <ErrorBanner message={error} onRetry={fetchRequests} />}
 
+      {/* Submission success banner */}
+      {submitSuccess && (
+        <div style={{
+          background: submitSuccess.startsWith("🚨") ? "linear-gradient(135deg,#E8192C,#c0102a)" : "#22c55e18",
+          color: submitSuccess.startsWith("🚨") ? "#fff" : "#22c55e",
+          border: submitSuccess.startsWith("🚨") ? "none" : "1px solid #22c55e30",
+          borderRadius: 12,
+          padding: "12px 16px",
+          fontSize: 13,
+          fontWeight: 600,
+          lineHeight: 1.5,
+          boxShadow: submitSuccess.startsWith("🚨") ? "0 4px 20px rgba(232,25,44,0.35)" : "none",
+        }}>
+          {submitSuccess}
+        </div>
+      )}
+
       {/* New Request Form */}
-      <NewRequestForm onSubmitted={fetchRequests} lng={lng} lat={lat} />
+      <NewRequestForm
+        onSubmitted={({ wasEmergency, bloodType }) => {
+          if (wasEmergency) {
+            // Tell AppLayout to suppress the bounced socket toast for this submission
+            window.dispatchEvent(new Event("donora:ownEmergencySubmitted"));
+            setSubmitSuccess(
+              `🚨 Your emergency request has been sent — ${bloodType ? bloodType + " blood" : "blood"} needed urgently. Nearby facilities will be alerted.`
+            );
+          } else {
+            setSubmitSuccess("✓ Request submitted successfully.");
+          }
+          setTimeout(() => setSubmitSuccess(null), 7000);
+          fetchRequests();
+        }}
+        lng={lng}
+        lat={lat}
+      />
 
       {/* Tabs */}
       <div className={styles.tabs}>

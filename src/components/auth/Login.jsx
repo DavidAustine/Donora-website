@@ -154,11 +154,11 @@ export default function Login() {
               {!isLogin && (
                 <>
                   <div className={styles.field}>
-                    <label className={styles.label}>Blood Bank Name</label>
+                    <label className={styles.label}>Medical Facility Name</label>
                     <div className={styles.inputWrap}>
                       <span className={styles.inputIcon}>🏥</span>
                       <input name="name" className={styles.input}
-                        placeholder="e.g. Lagos Central Blood Bank"
+                        placeholder="e.g. Nizamiye Hospital"
                         value={form.name} onChange={handle} required />
                     </div>
                   </div>
@@ -222,7 +222,7 @@ export default function Login() {
                 disabled={loading || geoLoading}>
                 {geoLoading ? "Getting location…"
                   : loading ? "Please wait…"
-                  : isLogin ? "Sign In →" : "Register Blood Bank →"}
+                  : isLogin ? "Sign In →" : "Register Medical Facility →"}
               </button>
             </form>
           )}

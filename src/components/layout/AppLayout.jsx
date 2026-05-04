@@ -177,6 +177,19 @@ export default function AppLayout() {
     navigate("/request");
   }, [dismissToast, navigate]);
 
+  // ── Suppress own-submitted emergency toast ───────────────────────────────
+  // When this blood bank submits an emergency request, suppress the socket
+  // toast that bounces back to them for 8 seconds.
+  const suppressUntilRef = useRef(0);
+
+  useEffect(() => {
+    const handler = () => {
+      suppressUntilRef.current = Date.now() + 8000;
+    };
+    window.addEventListener("donora:ownEmergencySubmitted", handler);
+    return () => window.removeEventListener("donora:ownEmergencySubmitted", handler);
+  }, []);
+
   // ── Socket connection ─────────────────────────────────────────────────────
   useEffect(() => {
     if (!user) return;
@@ -199,6 +212,8 @@ export default function AppLayout() {
     // Backend should emit this from requestController when isEmergency=true.
     // See note at the bottom of this file for the backend emit snippet.
     socket.on("emergencyRequest", (data) => {
+      // Skip if this blood bank just submitted this emergency themselves
+      if (Date.now() < suppressUntilRef.current) return;
       addToast({
         bloodType: data.requiredBloodType || data.bloodType || null,
         distance: data.distance || null,

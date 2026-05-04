@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { useGeolocation } from "../../hooks/useApi";
 import { bloodBankAPI, donorAPI, chatAPI } from "../../services/api";
@@ -201,6 +202,7 @@ function DonorCard({ donor, onChat, chatting, t }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function NearbyFacilities() {
   const { t } = useTheme();
+  const navigate = useNavigate();
   const { lng, lat, geoError } = useGeolocation();
   const [tab, setTab] = useState("facilities");
   const [radius, setRadius] = useState(20);
@@ -239,14 +241,9 @@ export default function NearbyFacilities() {
     setChatSuccess(null);
     try {
       // Start or resume a direct thread with this user
-      const thread = await chatAPI.startDirectThread(userId);
-      setChatSuccess(
-        thread?.threadId || thread?._id
-          ? "Chat opened — go to Messages to continue."
-          : "Chat started!"
-      );
-      // Small delay then navigate (or just show success)
-      setTimeout(() => setChatSuccess(null), 4000);
+      await chatAPI.startDirectThread(userId);
+      // Navigate to Messages so the user can continue the conversation
+      navigate("/messages");
     } catch (err) {
       alert(err.message);
     } finally {
