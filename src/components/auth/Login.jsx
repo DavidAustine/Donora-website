@@ -122,8 +122,8 @@ export default function Login() {
   const headerSub = step > 0
     ? "We'll get you back in"
     : isLogin
-    ? "Sign in to your blood bank portal"
-    : "Register your blood bank institution";
+    ? "Sign in to your medical facility portal"
+    : "Register your medical institution";
 
   return (
     <div className={styles.container}>
@@ -136,7 +136,7 @@ export default function Login() {
             </div>
             <div className={styles.logoText}>
               Donora
-              <span>Blood Bank Network</span>
+              <span>Blood Network</span>
             </div>
           </div>
           <div className={styles.headerTitle}>{headerTitle}</div>
