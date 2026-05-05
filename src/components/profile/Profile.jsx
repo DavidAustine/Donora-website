@@ -82,7 +82,7 @@ export default function Profile() {
           <div className={styles.cardTop} style={{ background: t.gradientRedStrip }}>
             <div className={styles.avatar}>{initials}</div>
             <div className={styles.avatarName}>{displayName}</div>
-            <div className={styles.avatarRole}>Blood Bank</div>
+            <div className={styles.avatarRole}>Medical Facility</div>
             <div className={styles.verifiedBadge}>
               <span className={styles.verifiedDot} />
               Verified Facility
@@ -93,7 +93,7 @@ export default function Profile() {
             {[
               { label: "Email", value: user?.email || "—" },
               { label: "Phone", value: profile?.phone || "Not set" },
-              { label: "Role", value: user?.role || "bloodbank" },
+              { label: "Role", value: user?.role || "Medical Facility" },
               { label: "Member since", value: "—" },
             ].map(f => (
               <div key={f.label} className={styles.detailRow}
@@ -111,7 +111,7 @@ export default function Profile() {
           <div className={styles.formHeader}
             style={{ borderBottom: `1px solid ${t.border}` }}>
             <span className={styles.formTitle} style={{ color: t.text }}>
-              Blood Bank Information
+              Medical Facility Information
             </span>
             <button
               className={`${styles.editToggle} ${editing ? styles.editToggleCancel : ""}`}
@@ -135,7 +135,7 @@ export default function Profile() {
               <div className={styles.grid}>
                 <div className={styles.field}>
                   <label className={styles.fieldLabel} style={{ color: t.textMuted }}>
-                    Blood Bank Name
+                    Facility Name
                   </label>
                   <input className={styles.input}
                     style={{ background: t.bgDark === "#000000" ? "#111" : "#F8F8F8", border: `1px solid ${t.border}`, color: t.text }}
@@ -182,7 +182,7 @@ export default function Profile() {
                   </label>
                   <div className={styles.roleDisplay}
                     style={{ background: `${t.primary}12`, border: `1px solid ${t.primary}20`, color: t.primary }}>
-                    🏥 Blood Bank
+                    🏥 Medical Facility
                   </div>
                 </div>
               </div>
