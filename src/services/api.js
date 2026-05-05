@@ -25,7 +25,15 @@ const apiFetch = async (endpoint, options = {}, isRetry = false) => {
   });
 
   // Auto-refresh on 401/403
-  if ((res.status === 401 || res.status === 403) && !isRetry) {
+  // Skip refresh logic for auth routes (like login/register)
+const isAuthRoute = endpoint.startsWith("/auth");
+
+// Auto-refresh on 401/403 (only for protected routes)
+if (
+  (res.status === 401 || res.status === 403) &&
+  !isRetry &&
+  !isAuthRoute
+) {
     try {
       const refreshToken = localStorage.getItem("refreshToken");
       if (!refreshToken) throw new Error("No refresh token");
