@@ -370,7 +370,7 @@ export default function AppLayout() {
       </div>
 
       {/* Mobile bottom nav */}
-      <nav className={styles.bottomNav} style={{ background: t.surface, borderTop: `1px solid ${t.border}` }}>
+      {/* <nav className={styles.bottomNav} style={{ background: t.surface, borderTop: `1px solid ${t.border}` }}>
         {NAV_ITEMS.map(item => (
           <NavLink
             key={item.path}
@@ -383,7 +383,7 @@ export default function AppLayout() {
             <span>{item.label}</span>
           </NavLink>
         ))}
-      </nav>
+      </nav> */}
     </div>
   );
 }
